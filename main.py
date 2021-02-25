@@ -1,5 +1,6 @@
 import urllib.request
 import smtplib
+from email.mime.text import MIMEText
 import ssl
 import time
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -9,26 +10,30 @@ is_service_up = True
 
 def send_email():
     # sender email
-    gmail_user = ''
+    gmail_user = 'iyasser007@gmail.com'
     # This is an app specific password.
     gmail_password = ''
 
     sent_from = gmail_user
-    # Receiver
-    to = ['']
     # Email Body
     body = """
     This is an email sent by Python Script.
     """
+    message = MIMEText(body)
+    # A list of recipients ( No limit - Min 1 )
+    recipients = ['mail@gmail.com', 'mail2@gmail.com', 'mail3@hotmail.com']
+    # Message Subject
+    message['Subject'] = "Subject line"
+    message['From'] = gmail_user
+    message['To'] = ", ".join(recipients)
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
         server.ehlo()
         server.login(gmail_user, gmail_password)
-        server.sendmail(sent_from, to, body)
+        server.sendmail(sent_from, recipients, message.as_string())
         server.close()
     except:
        print('Something went wrong...')
-
 
 while is_service_up:
     try:
