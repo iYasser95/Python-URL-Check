@@ -10,8 +10,9 @@ is_service_up = True
 
 def send_email():
     # sender email
-    gmail_user = 'iyasser007@gmail.com'
+    gmail_user = 'your_email@gmail.com'
     # This is an app specific password.
+    # You can find how to generate a password here -> https://support.google.com/accounts/answer/185833?hl=en
     gmail_password = ''
 
     sent_from = gmail_user
